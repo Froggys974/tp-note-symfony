@@ -1,0 +1,9 @@
+App\Entity\User:
+  user_admin:
+    email: admin@admin.fr
+    roles: ['ROLE_ADMIN']
+    plainPassword: 'admin'
+
+  user_{1..15}:
+    email: <email()>
+    plainPassword: <password()>

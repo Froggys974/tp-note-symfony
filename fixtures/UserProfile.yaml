@@ -1,0 +1,17 @@
+
+App\Entity\UserProfile:
+  user_profile (template):
+    firstName: "<firstName()>"
+    lastName: "<lastName()>"
+    username: "<username()>"
+    createdAt: "<dateTimeBetween('-1 years', 'now')>"
+    updatedAt: "<dateTimeBetween('-1 years', 'now')>"
+    user: '@user_<current()>'
+
+  user_profile_{1..15} (extends user_profile):
+
+  user_profile_admin (extends user_profile):
+    user: '@user_admin'
+    firstName: 'Admin'
+    lastName: 'Super'
+    username: 'adminsuper'
