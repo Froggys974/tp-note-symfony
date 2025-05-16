@@ -4,8 +4,6 @@ App\Entity\UserProfile:
     firstName: "<firstName()>"
     lastName: "<lastName()>"
     username: "<username()>"
-    createdAt: "<dateTimeBetween('-1 years', 'now')>"
-    updatedAt: "<dateTimeBetween('-1 years', 'now')>"
     user: '@user_<current()>'
 
   user_profile_{1..15} (extends user_profile):

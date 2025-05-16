@@ -1,0 +1,7 @@
+App\Entity\Place:
+  place_{1..5}:
+    name: "Place <current()>"
+    address: "<streetAddress()>"
+    city: "<city()>"
+    postalCode: "<postcode()>"
+    country: "<country()>"

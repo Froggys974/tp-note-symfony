@@ -1,0 +1,9 @@
+App\Entity\Tag:
+  tag_{1..5}:
+    name: "Tag <current()>"
+
+App\Entity\Event:
+  event_{1..10}:
+    tags: 
+      - '@tag_<numberBetween(1, 5)>'
+      - '@tag_<numberBetween(1, 5)>'

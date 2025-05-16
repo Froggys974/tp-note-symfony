@@ -1,0 +1,7 @@
+App\Entity\Activity:
+  activity_{1..20}:
+    event: '@event_<numberBetween(1, 10)>'
+    name: "Activity <current()>"
+    description: "<sentence(10)>"
+    startTime: <dateTime()>
+    endTime: <dateTime()>
