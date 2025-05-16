@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 
 trait CreationModificationTrait
 {
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

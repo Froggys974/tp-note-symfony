@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserProfileRepository;
+use App\Trait\CreationModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserProfileRepository::class)]
