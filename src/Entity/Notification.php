@@ -6,7 +6,9 @@ use App\Repository\NotificationRepository;
 use App\Trait\CreationModificationTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification
 {
