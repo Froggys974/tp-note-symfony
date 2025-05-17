@@ -7,7 +7,9 @@ use App\Trait\CreationModificationTrait;
 use App\Trait\DescriptionNullableTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
 {

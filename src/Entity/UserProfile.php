@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\UserProfileRepository;
 use App\Trait\CreationModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: UserProfileRepository::class)]
 class UserProfile
 {

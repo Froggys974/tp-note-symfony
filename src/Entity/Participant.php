@@ -6,7 +6,9 @@ use App\Enum\ParticipantStatusEnum;
 use App\Repository\ParticipantRepository;
 use App\Trait\CreationModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 class Participant
 {
