@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserProfile;
 use App\Form\RegistrationForm;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
@@ -34,14 +35,22 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            $profile = new UserProfile();
+            $profile->setUsername($form->get('username')->getData());
+            $profile->setFirstName($form->get('firstName')->getData());
+            $profile->setLastName($form->get('lastName')->getData());
+
+            // Associer UserProfile à User
+            $user->setUserProfile($profile);
+
+            $entityManager->persist($profile);
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('florent.grondin57@gmail.com', 'Support EventAppTpNote'))
                     ->to((string) $user->getEmail())

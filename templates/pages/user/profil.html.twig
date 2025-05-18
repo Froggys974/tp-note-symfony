@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de
+	{{ user.userProfile.username }}
+{% endblock %}
+
+{% block body %}
+	<div class="max-w-5xl mx-auto p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white rounded-xl shadow-xl mt-12">
+		<div class="flex items-center mb-8 space-x-6">
+			<div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center text-2xl font-bold">
+				{{ user.userProfile.username|slice(0, 1)|upper }}
+			</div>
+			<div>
+				<h1 class="text-4xl font-bold">{{ user.userProfile.username }}</h1>
+				<p class="text-sm text-gray-400">{{ user.email }}</p>
+			</div>
+		</div>
+
+		<div class="border-b border-gray-700 mb-4 profile-tabs">
+			<ul class="flex space-x-6 text-lg">
+				<li>
+					<a href="#infos" class="tab-link relative border-red-600 text-white hover:text-white transition px-4 py-2 border-b-2 hover:border-red-600">
+						Informations personnelles
+					</a>
+				</li>
+				<li>
+					<a href="#events" class="tab-link relative text-gray-400 hover:text-white transition px-4 py-2 border-b-2 border-transparent hover:border-red-600">
+						Événements
+					</a>
+				</li>
+				<li>
+					<a href="#password" class="tab-link relative text-gray-400 hover:text-white transition px-4 py-2 border-b-2 border-transparent hover:border-red-600">
+						Modifier mot de passe
+					</a>
+				</li>
+			</ul>
+		</div>
+
+
+		<div id="infos" class="space-y-4">
+			<h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Informations personnelles</h2>
+			<ul class="space-y-2">
+				<li>
+					<strong>Prénom :</strong>
+					{{ user.userProfile.firstName }}</li>
+				<li>
+					<strong>Nom :</strong>
+					{{ user.userProfile.lastName }}</li>
+				<li>
+					<strong>Email :</strong>
+					{{ user.email }}</li>
+				<li>
+					<strong>Date d'inscription :</strong>
+					{{ user.userProfile.createdAt ? user.userProfile.createdAt|date('d/m/Y') : 'N/A' }}</li>
+				<li>
+					<strong>Rôle :</strong>
+					{{ user.roles|join(', ') }}</li>
+			</ul>
+		</div>
+
+		<div id="events" class="space-y-4 hidden">
+			<h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Informations sur les événements</h2>
+			<ul class="space-y-2">
+				<li>
+					<strong>Événements créés :</strong>
+					{{ user.events|length }}</li>
+				<li>
+					<strong>Événements auxquels il a participé :</strong>
+					{{ user.participations|length }}</li>
+			</ul>
+		</div>
+
+		<div id="password" class="space-y-4 hidden">
+			<h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Modifier le mot de passe</h2>
+			<form method="post">
+				<input type="password" name="current_password" placeholder="Mot de passe actuel" class="w-full p-2 mb-4 bg-gray-700 text-white rounded">
+				<input type="password" name="new_password" placeholder="Nouveau mot de passe" class="w-full p-2 mb-4 bg-gray-700 text-white rounded">
+				<input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" class="w-full p-2 mb-4 bg-gray-700 text-white rounded">
+				<button type="submit" class="w-full bg-red-600 hover:bg-red-700 p-2 rounded">Modifier</button>
+			</form>
+		</div>
+	</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.profile-tabs a');
+
+    function clearActiveTabs() {
+      tabs.forEach(tab => {
+        tab.classList.remove('border-red-600', 'text-white');
+        tab.classList.add('text-gray-400');
+        tab.classList.remove('border-transparent');
+        tab.classList.add('border-transparent');
+      });
+    }
+
+
+    document.querySelectorAll('div[id]').forEach((div, index) => {
+      if (index === 0) {
+        div.classList.remove('hidden');
+      } else {
+        div.classList.add('hidden');
+      }
+    });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        document.querySelectorAll('div[id]').forEach(div => div.classList.add('hidden'));
+        document.querySelector(tab.getAttribute('href')).classList.remove('hidden');
+
+        clearActiveTabs();
+        tab.classList.add('border-red-600', 'text-white');
+        tab.classList.remove('border-transparent');
+      });
+    });
+  });
+</script>
+
+
+
+{% endblock %}

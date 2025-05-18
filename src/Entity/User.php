@@ -38,8 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?UserProfile $userProfile = null;
 
-    #[ORM\Column]
-    private bool $isVerified = false;
+    #[ORM\Column(nullable: true)]
+    private ?bool $isVerified = null;
 
     /**
      * @var Collection<int, Event>
@@ -155,12 +155,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isVerified(): bool
+    public function isVerified(): ?bool
     {
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): static
+    public function setIsVerified(?bool $isVerified): static
     {
         $this->isVerified = $isVerified;
 

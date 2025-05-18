@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Eventia
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-4xl font-bold mb-8 text-red-600">Événements à venir</h1>
+
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+		{% if events is defined and events|length > 0 %}
+			{% for event in events %}
+				{% include 'parts/_event_card.html.twig' with { event: event } %}
+			{% endfor %}
+		{% else %}
+			<p class="text-gray-400 col-span-full">Aucun événement disponible pour le moment.</p>
+		{% endif %}
+	</div>
+{% endblock %}
