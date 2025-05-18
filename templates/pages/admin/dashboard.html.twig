@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+    <h1 class="text-3xl font-bold mb-6">Bienvenue sur le tableau de bord Admin, {{ user.userProfile.username }}</h1>
+    <p>Gère ici les fonctionnalités réservées aux administrateurs.</p>
+{% endblock %}

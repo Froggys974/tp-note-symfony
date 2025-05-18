@@ -1,23 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	<div class="flex items-center justify-center text-white">
+		<div class="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
+			<h1 class="text-3xl font-bold mb-6 text-center">Créer un compte</h1>
 
-    <h1>Register</h1>
+			{% for flash_error in app.flashes('verify_email_error') %}
+				<div class="mb-4 p-3 bg-red-700 rounded text-red-200 text-center">
+					{{ flash_error }}
+				</div>
+			{% endfor %}
 
-    {{ form_errors(registrationForm) }}
+			{{ form_start(registrationForm, {attr: {class: 'space-y-4'}}) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.email, {attr: {class: 'w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600'}}) }}
+			{{ form_row(registrationForm.username, {attr: {class: 'w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600'}}) }}
+			{{ form_row(registrationForm.firstName, {attr: {class: 'w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600'}}) }}
+			{{ form_row(registrationForm.lastName, {attr: {class: 'w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600'}}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+			{{ form_row(registrationForm.plainPassword, {
+        label: 'Mot de passe',
+        attr: {class: 'w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600'}
+      }) }}
+
+			{{ form_row(registrationForm.agreeTerms, {attr: {class: 'accent-red-600'}}) }}
+
+			<button type="submit" class="w-full bg-red-600 hover:bg-red-700 transition rounded p-3 font-semibold">
+				S'inscrire
+			</button>
+
+			{{ form_end(registrationForm) }}
+
+			<p class="mt-6 text-center text-gray-400">
+				Déjà un compte ?
+				<a href="{{ path('app_login') }}" class="text-red-600 hover:text-red-700 underline">Se connecter</a>
+			</p>
+		</div>
+	</div>
 {% endblock %}
