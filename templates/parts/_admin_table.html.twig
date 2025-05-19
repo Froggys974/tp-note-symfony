@@ -1,0 +1,98 @@
+<div class="relative mb-4 inline-block text-left">
+	<button id="dropdownButton" class="inline-flex justify-center w-full rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-800 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none">
+		Afficher/Masquer les colonnes
+		<svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+			<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.94l3.71-3.75a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.23 8.25a.75.75 0 01-.02-1.06z" clip-rule="evenodd"/>
+		</svg>
+	</button>
+
+	<div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5">
+		<div class="py-1">
+			{% for header in headers %}
+				<div class="flex items-center px-4 py-2 text-sm text-white hover:bg-gray-700">
+					<input type="checkbox" id="checkbox-{{ header }}" value="{{ header }}" class="mr-2" {% if header not in hidden_headers %} checked {% endif %}>
+					<label for="checkbox-{{ header }}">{{ header|title }}</label>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<table class="min-w-full bg-gray-800 text-white border border-gray-700 rounded-md border-collapse">
+	<thead>
+		<tr>
+			{% for header in headers %}
+				<th class=" text-start px-4 py-2 border border-gray-700 header-{{ header }}">{{ header|title }}</th>
+			{% endfor %}
+			<th class="text-start px-4 py-2 border border-gray-700">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in items %}
+			<tr>
+				{% for header in headers %}
+					<td class="px-4 py-2 border border-gray-700 header-{{ header }}">
+						{% set value = attribute(item, header) %}
+						{% if value is iterable %}
+							{{ value|join(', ') }}
+						{% elseif value is same as(true) %}
+							<span class="text-green-500 font-bold">✅</span>
+						{% elseif value is same as(false) %}
+							<span class="text-red-500 font-bold">❌</span>
+						{% elseif value.getTimestamp is defined %}
+							{{ value|date('d/m/Y H:i') }}
+						{% else %}
+							{{ value }}
+						{% endif %}
+					</td>
+				{% endfor %}
+				<td class="px-4 py-2 border border-gray-700">
+					<a href="{{ path(edit_route, {id: item.id}) }}" class="text-blue-500 hover:text-blue-700 admin-modal-link mr-2">Edit</a>
+					<a href="{{ path(show_route, {id: item.id}) }}" class="text-green-500 hover:text-green-700 admin-modal-link">Show</a>
+
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<a href="{{ path(new_route) }}" class="admin-modal-link">Create new</a>
+<script>
+	const dropdownButton = document.getElementById('dropdownButton');
+const dropdownMenu = document.getElementById('dropdownMenu');
+
+dropdownButton.addEventListener('click', (e) => {
+e.stopPropagation();
+dropdownMenu.classList.toggle('hidden');
+});
+
+window.addEventListener('click', () => {
+if (! dropdownMenu.classList.contains('hidden')) {
+dropdownMenu.classList.add('hidden');
+}
+});
+
+dropdownMenu.addEventListener('click', (e) => {
+e.stopPropagation();
+});
+
+document.querySelectorAll('[id^="checkbox-"]').forEach(checkbox => {
+checkbox.addEventListener('change', function () {
+const headerClass = `.header-${
+this.value
+}`;
+document.querySelectorAll(headerClass).forEach(cell => {
+cell.style.display = this.checked ? '' : 'none';
+});
+});
+
+if (!checkbox.checked) {
+const headerClass = `.header-${
+checkbox.value
+}`;
+document.querySelectorAll(headerClass).forEach(cell => {
+cell.style.display = 'none';
+});
+}
+});
+</script>

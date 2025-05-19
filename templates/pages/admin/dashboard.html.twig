@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+<div class="flex">
+    {% include 'parts/_admin_left_panel.html.twig' %}
+
+    <div id="admin-content" class="flex-grow p-6 bg-gray-900 text-white">
+        {% block admin_content %}
+        <h1 class="text-3xl font-bold mb-6">Bienvenue sur le tableau de bord Admin, {{ user.userProfile.username }}</h1>
+        <p>Gère ici les fonctionnalités réservées aux administrateurs.</p>
+        {% endblock %}
+    </div>
+</div>
+
+{% include 'parts/_admin_modal.html.twig' %}
+
+<script>
+  document.querySelectorAll('.admin-modal-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const url = e.currentTarget.href;
+      fetch(url)
+        .then(r => r.text())
+        .then(html => {
+          document.getElementById('admin-modal-content').innerHTML = html;
+          document.getElementById('admin-modal').classList.remove('hidden');
+        })
+        .catch(err => console.error('Erreur:', err));
+    });
+  });
+
+  document.getElementById('admin-modal-close').addEventListener('click', () => {
+    document.getElementById('admin-modal').classList.add('hidden');
+    document.getElementById('admin-modal-content').innerHTML = '';
+  });
+
+  document.getElementById('admin-modal').addEventListener('click', e => {
+    if (e.target.id === 'admin-modal') {
+      document.getElementById('admin-modal-close').click();
+    }
+  });
+</script>
+{% endblock %}

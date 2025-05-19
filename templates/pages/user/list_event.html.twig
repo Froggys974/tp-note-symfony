@@ -1,0 +1,15 @@
+{% extends 'pages/user/event.html.twig' %}
+
+{% block event_content %}
+	<h1 class="text-3xl font-bold mb-6">Liste des événements</h1>
+
+	<div class="flex flex-wrap gap-6 justify-start">
+		{% for event in evenements %}
+			{% include 'parts/_event_card.html.twig' with { event: event } %}
+			{% include 'parts/_event_detail_modal.html.twig' with {event: event} %}
+			{# {% include 'parts/_event_edit_modal.html.twig' with {event: event, form: forms[event.id]} %} #}
+		{% else %}
+			<p class="text-gray-500">Aucun événement disponible.</p>
+		{% endfor %}
+	</div>
+{% endblock %}

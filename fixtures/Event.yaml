@@ -1,0 +1,11 @@
+App\Entity\Event:
+  event_{1..10}:
+    title: "Event <current()>"
+    description: "<sentence(10)>"
+    startDate: <dateTimeBetween('-1 years', 'now')>
+    endDate: <dateTimeBetween('now', '+1 years')>
+    place: '@place_<numberBetween(1, 5)>'
+    organizer: '@user_<numberBetween(1, 10)>'
+    tags: 
+      - '@tag_<numberBetween(1, 5)>'
+      - '@tag_<numberBetween(1, 5)>'

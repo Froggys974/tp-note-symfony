@@ -1,0 +1,26 @@
+App\Entity\UserProfile:
+  user_profile (template):
+    firstName: "<firstName()>"
+    lastName: "<lastName()>"
+    username: "<username()>"
+    user: '@user_<current()>'
+
+  user_profile_banned (extends user_profile):
+    user: '@user_banned'
+    firstName: 'Banni'
+    lastName: 'Utilisateur'
+    username: 'banneduser'
+
+  user_profile_classic (extends user_profile):
+    user: '@user_classic'
+    firstName: 'Jean'
+    lastName: 'Dupont'
+    username: 'jdupont'
+
+  user_profile_{1..15} (extends user_profile):
+
+  user_profile_admin (extends user_profile):
+    user: '@user_admin'
+    firstName: 'Admin'
+    lastName: 'Super'
+    username: 'adminsuper'

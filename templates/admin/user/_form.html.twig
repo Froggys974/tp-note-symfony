@@ -1,0 +1,13 @@
+{% form_theme form with [
+    'foundation_5_layout.html.twig',
+    'form/theme.html.twig'
+] %}
+
+{{ form_start(form, {
+    'action': path('app_admin_user_edit', {'id': form.vars.value.id}),
+    'method': 'POST',
+    'attr': {'id': 'user-edit-form'}
+}) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

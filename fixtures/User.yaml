@@ -1,0 +1,20 @@
+App\Entity\User:
+  user_admin:
+    email: admin@admin.fr
+    roles: ['ROLE_ADMIN']
+    plainPassword: 'admin'
+
+  user_banned:
+    email: banned@example.com
+    roles: ['ROLE_BANNED']
+    plainPassword: 'bannedpassword'
+
+  user_classic:
+    email: user@example.com
+    roles: ['ROLE_USER']
+    plainPassword: 'userpassword'
+
+  user_{1..15}:
+    email: <email()>
+    roles: ['ROLE_USER']
+    plainPassword: <password()>

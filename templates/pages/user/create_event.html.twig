@@ -1,0 +1,43 @@
+{% extends 'pages/user/event.html.twig' %}
+
+{% block event_content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-5">Créer un nouvel événement</h1>
+
+    {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+        <div>
+            {{ form_label(form.title, 'Titre de l\'événement', {'label_attr': {'class': 'block text-lg font-medium'}}) }}
+            {{ form_widget(form.title, {'attr': {'class': 'w-full border rounded p-2'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+
+        <div>
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-lg font-medium'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'w-full border rounded p-2'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div>
+            {{ form_label(form.startDate, 'Date de début', {'label_attr': {'class': 'block text-lg font-medium'}}) }}
+            {{ form_widget(form.startDate, {'attr': {'class': 'w-full border rounded p-2'}}) }}
+            {{ form_errors(form.startDate) }}
+        </div>
+
+        <div>
+            {{ form_label(form.endDate, 'Date de fin', {'label_attr': {'class': 'block text-lg font-medium'}}) }}
+            {{ form_widget(form.endDate, {'attr': {'class': 'w-full border rounded p-2'}}) }}
+            {{ form_errors(form.endDate) }}
+        </div>
+
+        <div>
+            {{ form_label(form.place, 'Lieu', {'label_attr': {'class': 'block text-lg font-medium'}}) }}
+            {{ form_widget(form.place, {'attr': {'class': 'w-full border rounded p-2'}}) }}
+            {{ form_errors(form.place) }}
+        </div>
+
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Créer l'événement
+        </button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

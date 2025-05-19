@@ -1,0 +1,10 @@
+{% extends 'pages/user/event.html.twig' %}
+
+{% block event_content %}
+<h2>🗓️ Mes Événements</h2>
+<ul>
+    {% for event in myEvents %}
+        <li>{{ event.title }} - {{ event.createdAt|date('d/m/Y H:i') }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

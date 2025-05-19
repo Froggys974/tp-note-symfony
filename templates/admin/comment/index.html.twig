@@ -1,0 +1,16 @@
+{% extends 'pages/admin/dashboard.html.twig' %}
+
+{% block admin_content %}
+    {% set headers = ['id', 'content', 'createdAt', 'updatedAt'] %}
+    {% set hidden_headers = ['updatedAt'] %} {# Masqué par défaut #}
+
+    {% include 'parts/_admin_table.html.twig' with {
+        title: 'Gestion des Commentaires',
+        headers: headers,
+        hidden_headers: hidden_headers,
+        items: comments,
+        edit_route: 'app_admin_comment_edit',
+        show_route: 'app_admin_comment_show',
+        new_route: 'app_admin_comment_new'
+    } %}
+{% endblock %}

@@ -1,0 +1,11 @@
+App\Entity\Comment:
+  comment_{1..20}:
+    event: '@event_<numberBetween(1, 10)>'
+    user: '@user_<numberBetween(1, 10)>'
+    content: "<sentence(20)>"
+
+  comment_with_parent_{1..20}:
+    content: "<sentence()>"
+    # statusEnum: !php/const \App\Enum\CommentStatusEnum::PUBLISH
+    user: '@user_<numberBetween(1, 10)>'
+    parentComment: "@comment_*"

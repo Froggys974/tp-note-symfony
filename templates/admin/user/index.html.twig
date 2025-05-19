@@ -1,0 +1,16 @@
+{% extends 'pages/admin/dashboard.html.twig' %}
+
+{% block admin_content %}
+    {% set headers = ['id', 'email', 'roles', 'isVerified'] %}
+    {% set hidden_headers = ['roles'] %}
+
+    {% include 'parts/_admin_table.html.twig' with {
+        title: 'Gestion des Utilisateurs',
+        headers: headers,
+        hidden_headers: hidden_headers,
+        items: users,
+        edit_route: 'app_admin_user_edit',
+        show_route: 'app_admin_user_show',
+        new_route: 'app_admin_user_new'
+    } %}
+{% endblock %}
