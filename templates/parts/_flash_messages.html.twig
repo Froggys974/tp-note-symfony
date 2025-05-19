@@ -1,12 +1,12 @@
 {% for label, messages in app.flashes %}
-    <div class="mb-4">
-        {% for message in messages %}
-            <div class="rounded-md p-4 mb-2 
-                {% if label == 'success' %} bg-green-700 text-green-100 
-                {% elseif label == 'error' %} bg-red-700 text-red-100 
-                {% else %} bg-gray-700 text-gray-100 {% endif %}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
+	<div class="p-4 mb-4 rounded
+			            {% if label == 'success' %}bg-green-600 text-white{% endif %}
+			            {% if label == 'error' %}bg-red-600 text-white{% endif %}
+			            {% if label == 'warning' %}bg-yellow-500 text-black{% endif %}
+			            {% if label == 'info' %}bg-blue-500 text-white{% endif %}
+			        ">
+		{% for message in messages %}
+			{{ message }}
+		{% endfor %}
+	</div>
 {% endfor %}

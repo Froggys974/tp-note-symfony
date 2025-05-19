@@ -1,0 +1,45 @@
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden mb-6">
+	<div class="flex">
+		<div class="flex flex-col items-center justify-center bg-gray-100 p-4 w-20">
+			<div class="text-2xl font-extrabold text-blue-600">
+				{{ event.createdAt|date('d') }}
+			</div>
+			<div class="uppercase text-gray-500 text-xs tracking-wide">
+				{{ event.createdAt|date('M') }}
+			</div>
+			<div class="text-gray-400 text-xs">
+				{{ event.createdAt|date('Y') }}
+			</div>
+		</div>
+		<div class="flex-1 p-4">
+			<h5 class="text-lg font-semibold text-gray-900 mb-1 truncate">{{ event.title }}</h5>
+			<p class="text-gray-600 text-sm line-clamp-2 mb-2">
+				{{ event.description ?: 'Pas de description' }}
+			</p>
+			<p class="text-gray-500 text-xs mb-4">
+				Lieu :
+				<span class="font-medium text-gray-700">{{ event.place.name }}</span>
+				- Organisé par
+				<span class="font-medium">{{ event.organizer.userProfile.firstName ?? event.organizer.email }}</span>
+			</p>
+			<div class="flex space-x-3">
+				<button onclick="openModal('eventDetailModal_{{ event.id }}')" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs font-semibold transition">
+					Voir détails
+				</button>
+				<button onclick="openModal('eventEditModal_{{ event.id }}')" class="px-3 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 text-xs font-semibold transition">
+					Modifier
+				</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function openModal(id) {
+document.getElementById(id).classList.remove('hidden');
+}
+
+function closeModal(id) {
+document.getElementById(id).classList.add('hidden');
+}
+</script>
