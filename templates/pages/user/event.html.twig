@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="flex">
+		<div class="w-1/4 bg-gray-800 text-white h-screen p-4">
+			<ul>
+				{# <li class="mb-4"><a href="{{ path('event_invitations') }}" class="text-lg hover:text-gray-400">🎉 Invitations</a></li> #}
+				<li class="mb-4">
+					<a href="{{ path('event_list') }}" class="text-lg hover:text-gray-400">📅 Liste des événements</a>
+				</li>
+				<li class="mb-4">
+					<a href="{{ path('event_my_events') }}" class="text-lg hover:text-gray-400">🗓️ Mes événements</a>
+				</li>
+				<li>
+					<a href="{{ path('event_create') }}" class="text-lg hover:text-gray-400">
+						➕ Créer un événement</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w-3/4 p-4">
+			{% block event_content %}{% endblock %}
+		</div>
+	</div>
+{% endblock %}

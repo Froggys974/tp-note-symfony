@@ -1,0 +1,7 @@
+{% extends 'pages/admin/modal_base.html.twig' %}
+
+{% block modal_content %}
+	<h1>Create new User</h1>
+	{{ include('admin/user/_form.html.twig') }}
+	<a href="{{ path('app_admin_user_index') }}">back to list</a>
+{% endblock %}

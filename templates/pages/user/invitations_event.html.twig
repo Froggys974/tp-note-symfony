@@ -1,0 +1,10 @@
+{% extends 'pages/user/event.html.twig' %}
+
+{% block event_content %}
+<h2>🎉 Mes Invitations</h2>
+<ul>
+    {% for invitation in invitations %}
+        <li>{{ invitation.name }} - {{ invitation.createdAt|date('d/m/Y H:i') }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
